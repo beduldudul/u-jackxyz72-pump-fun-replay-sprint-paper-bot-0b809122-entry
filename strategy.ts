@@ -1,15 +1,16 @@
 // Launch sniper with a rug filter, for agent-fun/replay/v2 (pump.fun bonding curves).
 //
-// Every coin is watched from its CreateEvent. In its first slots (age <= maxAge)
+// Each coin is followed from its CreateEvent. In its first slots (age <= maxAge)
 // the bot reads the opening tape: how much real SOL the curve holds, how big the
-// creator's own buy was, how many other wallets piled in with it (a launch bundled
-// by many wallets in its first slots is usually the creator's cluster waiting to
-// dump), and whether the creator has already sold. It buys only launches that pass
-// — real SOL between 3 and 30, creator buy at most 2.5 SOL, at most 3 distinct
-// buyers, creator never sold — takes profit fast (tpBps), cuts losers faster
-// (slBps), never holds past maxHold slots, and leaves at once when the creator
-// sells. One buy per coin, no adds, no order splitting: every extra transaction
-// is a fixed fee, so the bot pays one buy and one sell per coin.
+// creator's own buy was, how many other wallets bought in with it (a launch
+// bundled by many wallets in its first slots is usually the creator's cluster
+// waiting to dump), and whether the creator has already sold. It buys only
+// launches that pass — real SOL between 3 and 30, creator buy at most 2.5 SOL,
+// at most 3 distinct buyers, creator never sold — takes profit fast (tpBps),
+// cuts losers faster (slBps), never holds past maxHold slots, and exits at
+// once when the creator sells. One buy per coin, no adds, no order splitting:
+// every extra transaction is a fixed fee, so the bot pays one buy and one
+// sell per coin.
 //
 // Why these settings: on the kit's dev window the deep-liquidity launches are
 // the only ones that behave — coins with under 3 SOL of real liquidity gap down
